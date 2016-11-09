@@ -1,2 +1,2 @@
 # nameko-cloudant
-A dependency provider for cloudant
+A dependency for cloudant
