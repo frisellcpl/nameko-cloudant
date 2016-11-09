@@ -1,35 +1,31 @@
 from weakref import WeakKeyDictionary
-
 from nameko.extensions import DependencyProvider
-
 from cloudant.client import Cloudant
 
-DB_USERNAME = 'DB_USERNAME'
-DB_PASSWORD = 'DB_PASSWORD'
-DB_ACCOUNT = 'DB_ACCOUNT'
+DATABASE_CONFIG = 'DATABASE'
 
 
-class DatabaseClient(DependencyProvider):
+class DatabaseSession(DependencyProvider):
     def __init__(self, database):
         self.database = database
         self.clients = WeakKeyDictionary()
 
     def setup(self):
-        self.username = self.container.config[DB_USERNAME]
-        self.password = self.container.config[DB_PASSWORD]
-        self.account = self.container.config[DB_ACCOUNT]
+        self.config = self.container.config[DATABASE_CONFIG]
 
     def stop(self):
-        client = self.clients[worker_ctx]
-        client.disconnect()
-        del client
+        for client in self.clients:
+            client.disconnect()
+            del client
 
     def get_dependency(self, worker_ctx):
         client = Cloudant(
-            self.username,
-            self.password,
-            account=self.account,
+            self.config['username'],
+            self.config['password'],
+            account=self.config['account'],
+            database=self.database,
         )
+
         self.clients[worker_ctx] = client
         client.connect()
         return client[self.database]
