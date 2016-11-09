@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='nameko-cloudant',
-    version='0.0.1',
+    version='0.1',
     description='A dependency for cloudant',
     author='frisellcpl',
     author_email='johan@trell.se',
@@ -11,7 +11,7 @@ setup(
     packages=['nameko_cloudant'],
     install_requires=[
         "nameko==2.4.2",
-        "cloudant"
+        "cloudant==2.3.0"
     ],
     zip_safe=True,
     license='Apache License, Version 2.0',
