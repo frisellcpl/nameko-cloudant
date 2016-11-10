@@ -25,7 +25,6 @@ class DatabaseSession(DependencyProvider):
             self.config['username'],
             self.config['password'],
             account=self.config['account'],
-            database=self.database,
         )
 
         self.clients[worker_ctx] = client
