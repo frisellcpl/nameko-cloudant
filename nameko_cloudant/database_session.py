@@ -6,12 +6,14 @@ DATABASE_CONFIG = 'DATABASE'
 
 
 class DatabaseSession(DependencyProvider):
-    def __init__(self, database):
+    def __init__(self, database, config=None):
         self.database = database
+        self.config = config
         self.clients = WeakKeyDictionary()
 
-    def setup(self, config=None):
-        self.config=config if config else self.container.config[DATABASE_CONFIG]
+    def setup(self):
+        if not self.config:
+            self.config = self.container.config[DATABASE_CONFIG]
 
     def stop(self):
         for client in self.clients:

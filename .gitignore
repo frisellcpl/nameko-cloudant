@@ -20,3 +20,6 @@ db.sqlite3
 .sass-cache
 
 /env
+/dist
+/nameko_cloudant.egg-info
+/build
