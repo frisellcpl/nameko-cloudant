@@ -10,7 +10,7 @@ setup(
     url='http://github.com/frisellcpl/nameko-cloudant',
     packages=['nameko_cloudant'],
     install_requires=[
-        "nameko==2.4.2",
+        "nameko==2.14.0",
         "cloudant==2.3.0"
     ],
     zip_safe=True,
